@@ -19,7 +19,6 @@ class PullRequestSizeContainer extends Component {
 
     handleChartBar() {
         let jsonData = helper.jsonChartBarCreation(this.props.repoInfo.pullRequests)
-        console.log("oq ", jsonData);
         return <ChartBarComponent jsonChart={jsonData} />
     }
 
@@ -28,7 +27,6 @@ class PullRequestSizeContainer extends Component {
         if(this.props.repoInfo && this.props.repoInfo.missingPR === 0) {
             chart = this.handleChartBar()
         }
-        console.log("eh ", this.props.repoInfo)
         return (
             <Card  border="light" style={{ width: '18rem' }}>
                 <Card.Header>

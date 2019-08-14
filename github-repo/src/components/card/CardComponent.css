@@ -1,0 +1,22 @@
+.card-columns .card {
+    margin-bottom: .75rem;
+    margin-left: .95em;
+    width: 12rem;
+}
+
+
+
+.card-header {
+    background-color: white !important;
+    font-size: 10px;
+    font-weight: 800;
+    color: #939393;
+}
+
+.card-body {
+    background-color: white !important;
+    padding-right: 0.6em !important;
+    padding-top: 1.4em !important;
+    padding-left: 0.6em !important;
+    padding-bottom: 1.2 !important;
+}
