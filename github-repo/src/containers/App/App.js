@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import logo from "../../assets/logo.png";
 import { Grid, Paper, InputBase } from "@material-ui/core";
+import PullRequestSizeContainer from '../pull-request-size/PullRequestSizeContainer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
       </Grid>
+    <PullRequestSizeContainer />
     </Grid>
   );
 }
