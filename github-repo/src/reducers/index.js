@@ -6,12 +6,8 @@ const initialState = {
     username: null,
     repo: null,
     repoInfo: [],
-    allPullRequests: [],
-    allIssues: [],
-    pullRequests: [],
-    issues: [],
-    missingPR: null,
-    missingIssues: null,
+    events: [],
+    issuesEvents: [],
     loading: false,
     loaded: false,
 };
@@ -31,30 +27,12 @@ export const repoReducer = (state = initialState, action) => {
             loading: true,
             loaded: false,
         }
-    case type.LOADING_REPO:
-        return {
-            ...state,
-            missingPR: action.pullRequests.length,
-            missingIssues: action.issues.length,
-            allPullRequests: action.pullRequests,
-            allIssues: action.issues,
-            repoInfo: action.repoInfo
-        }
-    case type.LOADING_PULL_REQUEST:
-        return {
-            ...state,
-            missingPR: state.missingPR - 1,
-            pullRequests: [...state.pullRequests, action.pullRequest]
-        }
-    case type.LOADING_ISSUES:
-        return {
-            ...state,
-            missingIssues: state.missingIssues - 1,
-            issues: [...state.issues, action.issues]
-        }
     case type.LOAD_REPO_DATA_SUCCESS:
         return {
             ...state,
+            repoInfo: action.repoInfo,
+            events: action.events,
+            issuesEvents: action.issues,
             loading: false, 
             loaded: true
         }

@@ -3,30 +3,24 @@ import * as constants from './constants';
 
 export function jsonChartBarCreation(pullRequests) {
   var json = constants.jsonChartBar;
-  json.data = constants.jsonSize;
+  var data = [];
 
-  var keys = [];
-  let number = 1;
-  json.data.forEach(item => {
-    let requests = [];
-    let key = `Pull requests ${number}`
-    pullRequests.forEach(prItem => {
-      if(pullRequestSize(prItem, item)) {
-        requests.push(parseInt(createMergeTime(prItem)))
+  json.labels.forEach(item => {
+    let obj = "";
+    pullRequests.forEach(pullRequest => {
+      if(pullRequestSize(pullRequest, item) && pullRequest.payload.pull_request.merged_at) {
+        obj = createMergeTime(pullRequest.payload.pull_request.merged_at)
+        data.push(obj)
       }
     });
-    number += 1
-    let sum = requests.reduce((previous, current) => current += previous);
-    let avg = sum / requests.length;
-    item[key] = avg;
-    keys.push(key)
+    let avg = parseInt(loadsh.mean(data))
+    json.datasets[0].data.push(avg);
   });
-  json.keys = keys
   return json;
 }
 
 export function pullRequestSize(item, selectedSize) {
-  let total = item.additions + item.deletions;
+  let total = item.payload.pull_request.additions + item.payload.pull_request.deletions;
   let size;
   if (loadsh.inRange(total, 0, 100)) {
     size = "Small";
@@ -35,17 +29,41 @@ export function pullRequestSize(item, selectedSize) {
   } else if (!loadsh.inRange(total, 1001)) {
     size = "Large";
   }
-  return selectedSize.size === size;
+  return selectedSize === size;
 }
 
 function createMergeTime(prItem) {
-  var fromDate = parseInt(new Date(prItem.created_at).getTime()); 
-  var toDate = parseInt(new Date(prItem.updated_at).getTime());
-  var timeDiff = (toDate - fromDate)/3600000;
+  var today = parseInt(new Date().getTime()); 
+  var date = parseInt(new Date(prItem).getTime());
+  var timeDiff = (today - date)/3600000;
 
-  return timeDiff
+  return parseInt(timeDiff)
 }
 
+export function averageTimePullRequest(events) {
+  var data = [];
 
+  events.forEach(event => {
+    if(event.type === "PullRequestEvent" && event.payload.pull_request.merged_at) {
+      let obj = createMergeTime(event.payload.pull_request.merged_at)
+      data.push(obj)
+    }
+  });
+  let avg = parseInt(loadsh.mean(data))
+  return avg
+}
+
+export function averageTimeIssues(issues) {
+  var data = [];
+
+  issues.forEach(issue => {
+    if(issue.issue.closed_at) {
+      let obj = createMergeTime(issue.issue.closed_at)
+      data.push(obj)
+    }
+  });
+  let avg = parseInt(loadsh.mean(data))
+  return avg
+}
 
 

@@ -7,46 +7,30 @@ import {
     CardContent,
     Divider
   } from '@material-ui/core';
+import * as helper from '../../utils/helper';
 import * as constants from '../../utils/constants';
-
-export const data = {
-    labels: ["Small", "Medium", "Large"],
-    datasets: [
-      {
-        label: 'Pull request',
-        backgroundColor: "#4A9BFF",
-        data: [22, 32, 45]
-      }
-    ]
-  };
 
 class PullRequestSizeContainer extends Component {
     constructor(props) {
         super(props);
 
-        // this.handleClick = this.handleClick.bind(this)
+        this.handleChartBar = this.handleChartBar.bind(this);
     }
-
-    // handleClick() {
-    //     this.props.loadRepoData("plouc", "nivo")
-    // }
-
-    // handleChartBar() {
-    //     let jsonData = helper.jsonChartBarCreation(this.props.repoInfo.pullRequests)
-    //     return <ChartBarComponent jsonChart={jsonData} />
-    // }
-
+    handleChartBar() {
+        let repo = this.props.repoInfo.events;
+        var pullRequests = repo.filter(element => {
+            return element.type === "PullRequestEvent";
+          });
+        let json = helper.jsonChartBarCreation(pullRequests);
+        return json;
+    }
     render() {
-        // let chart;
-        // if(this.props.repoInfo && this.props.repoInfo.missingPR === 0) {
-        //     chart = this.handleChartBar()
-        // }
         return (
             <Card className="cardChart-section">
                 <CardHeader title={constants.mergeTimePullRequestSize} />
                 <Divider />
                 <CardContent>
-                    <ChartBarComponent jsonChart={data} />
+                    <ChartBarComponent jsonChart={this.handleChartBar()} />
                 </CardContent>
             </Card>
         )

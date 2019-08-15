@@ -17,32 +17,15 @@ export const jsonTitles = {
     }
 }
 
-export const jsonSize = [
-    {
-        "size": "Small",
-    },
-    {
-        "size": "Medium",
-    },
-    {
-        "size": "Large",
-    }
-];
 export const jsonChartBar = {
-    "data": [],
-    "keys": [],
-    "index": "size"
-}
-
-export const jsonChartLine = {
-    "id": "",
-    "color": "",
-    "data": []
-}
-
-export const jsonDataChart = {
-    "x": "",
-    "y": 0
+    labels: ["Small", "Medium", "Large"],
+    datasets: [
+        {
+            label: "Pull request",
+            backgroundColor: "#4A9BFF",
+            data: []
+        }
+    ]
 }
 
 export const jsonCard = {
