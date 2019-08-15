@@ -4,21 +4,18 @@ import logo from "../../assets/logo.png";
 import { Grid } from "@material-ui/core";
 import PullRequestSizeContainer from "../pull-request-size/PullRequestSizeContainer";
 import MergeTimeContainer from '../merge-time/MergeTimeContainer';
+import SummaryContainer from '../summary/SummaryContainer';
 
 function App() {
   return (
-    // <Grid container justify="left" className="Background">
-    //   <Grid item xs={3}>
-    //     <div className="App-header">
-    //       <img src={logo} className="App-logo" alt="logo" />
-    //     </div>
-    //   </Grid>
-    //   <div>
-    <div className="root">
+        // <div className="App-header">
+        //   <img src={logo} className="App-logo" alt="logo" />
+        // </div>
+      <div>
       <PullRequestSizeContainer />
       <MergeTimeContainer />
+      <SummaryContainer />
       </div>
-    // </Grid>
   );
 }
 

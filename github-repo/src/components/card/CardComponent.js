@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
+import {
+    Card,
+    CardHeader,
+    CardContent,
+    Divider
+  } from '@material-ui/core';
 import './CardComponent.css';
 
 export default class CardComponent extends Component {
     render() {
         const { cardElements } = this.props
         return (
-            <Card border="light">
-                <Card.Header>
-                    {cardElements.title}
-                </Card.Header>
-                <Card.Body>
+            <Card>
+                <CardHeader title={cardElements.title} />
+                <Divider />
+                <CardContent className="cardContent-style">
                     {cardElements.value}
-                </Card.Body>
+                </CardContent>
             </Card>
         );
     }

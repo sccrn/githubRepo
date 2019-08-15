@@ -21,6 +21,27 @@
   flex-basis: 0% !important;
 }
 
-.root {
+html {
   background-color: #F1F2F5;
+}
+
+.cardChart-section {
+  margin: 20px;
+}
+
+.gridContainer-style {
+  margin: 8px !important;
+  width: 100% !important;
+}
+
+.MuiTypography-h5 {
+  font-size: 11px !important;
+}
+
+.gridCard-style {
+  width: 49% !important;
+}
+
+.gridIssueCard-style {
+  width: 49% !important;
 }

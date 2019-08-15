@@ -2,23 +2,53 @@ import React, { Component } from "react";
 import "./ChartLineComponent.css";
 import PropTypes from "prop-types";
 import { ResponsiveLine } from "@nivo/line";
+import LegendComponent from '../legend/LegendComponent';
 
 export default class ChartLineComponent extends Component {
   render() {
-    const { jsonChart, colorsBy } = this.props;
+    const { jsonChart } = this.props;
     return (
       <div className="Chart-component">
         <ResponsiveLine
-          data={jsonChart.data}
-          margin={{ top: 20, right: 100, bottom: 50, left: 60 }}
-          xScale={{ type: "point" }}
-          yScale={{ type: "linear", stacked: true, min: 0, max: 1034 }}
+          data={jsonChart}
+          enableSlices="x"
+          curve={"linear"}
+          yScale={{
+            type: "linear",
+            stacked: true
+          }}
+          sliceTooltip={({ slice }) => {
+            return (
+              <div
+                style={{
+                  background: "white",
+                  padding: "9px 12px",
+                  border: "1px solid #ccc"
+                }}
+              >
+                <div>Issues</div>
+                <LegendComponent data={slice.points} />
+                {/* {slice.points.map(point => (
+                  <div
+                    key={point.id}
+                    style={{
+                      color: point.serieColor,
+                      padding: "3px 0"
+                    }}
+                  >
+                    <strong>{point.serieId}</strong> [{point.data.yFormatted}]
+                  </div>
+                ))} */}
+              </div>
+            );
+          }}
+          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
           axisTop={null}
           axisRight={null}
           axisBottom={{
             orient: "bottom",
-            tickSize: 4,
-            tickPadding: 0,
+            tickSize: 5,
+            tickPadding: 5,
             tickRotation: 0,
             legend: "",
             legendOffset: 36,
@@ -26,41 +56,47 @@ export default class ChartLineComponent extends Component {
           }}
           axisLeft={{
             orient: "left",
-            tickSize: 2,
+            tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
             legend: "",
-            legendOffset: -42,
+            legendOffset: -40,
             legendPosition: "middle"
           }}
-          colors={colorsBy}
-          enablePoints={false}
+          colors={{ datum: "color" }}
+          pointSize={3}
+          pointColor={{ theme: "background" }}
+          pointBorderWidth={2}
+          pointBorderColor={{ from: "serieColor" }}
+          pointLabel="y"
+          pointLabelYOffset={-12}
           useMesh={true}
           legends={[
             {
               anchor: "bottom",
               direction: "row",
               justify: false,
-              translateX: 14,
+              translateX: 8,
               translateY: 45,
-              itemsSpacing: 5,
+              itemsSpacing: 0,
               itemDirection: "left-to-right",
-              itemWidth: 66,
-              itemHeight: 21,
+              itemWidth: 79,
+              itemHeight: 20,
               itemOpacity: 0.75,
-              symbolSize: 8,
+              symbolSize: 10,
               symbolShape: "circle",
               symbolBorderColor: "rgba(0, 0, 0, .5)",
-              effects: [{
+              effects: [
+                {
                   on: "hover",
                   style: {
                     itemBackground: "rgba(0, 0, 0, .03)",
                     itemOpacity: 1
                   }
-                }]
+                }
+              ]
             }
           ]}
-          motionDamping={10}
         />
       </div>
     );

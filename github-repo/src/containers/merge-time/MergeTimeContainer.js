@@ -19,23 +19,20 @@ class MergeTimeContainer extends Component {
             json.title = constants.issueCloseTime;
             json.value = "5days 3h25min";
         }
-
         return json
     }
 
   render() {
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Grid container spacing={3}>
-            <Grid key={5} item>
+      <Grid container spacing={3} className="gridContainer-style">
+          {/* <Grid container spacing={3} className> */}
+            <Grid item className="gridCard-style">
               <CardComponent cardElements={this.handleCardComponent(true)} />
             </Grid>
-            <Grid key={5} item>
+            <Grid item className="gridIssueCard-style">
             <CardComponent cardElements={this.handleCardComponent(false)} />
             </Grid>
-          </Grid>
-        </Grid>
+          {/* </Grid> */}
       </Grid>
     );
   }

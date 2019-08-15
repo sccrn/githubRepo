@@ -3,6 +3,7 @@ export const API_ROOT = 'https://api.github.com/repos';
 export const mergeTimePullRequestSize = "Average Merge Time by Pull Request Size";
 export const pullRequestMergeTime = "Average Pull Request Merge Time";
 export const issueCloseTime = "Average Issue Close Time";
+export const monthSummary = "Month Summary";
 
 export const jsonSize = [
     {
