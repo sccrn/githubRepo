@@ -5,6 +5,15 @@ export const pullRequestMergeTime = "Average Pull Request Merge Time";
 export const issueCloseTime = "Average Issue Close Time";
 export const monthSummary = "Month Summary";
 
+export const jsonTitles = {
+    "pullR": {
+        "title": "",
+    },
+    "issues": {
+        "title": "",
+    }
+}
+
 export const jsonSize = [
     {
         "size": "Small",

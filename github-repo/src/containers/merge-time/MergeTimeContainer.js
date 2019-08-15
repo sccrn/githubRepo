@@ -25,14 +25,12 @@ class MergeTimeContainer extends Component {
   render() {
     return (
       <Grid container spacing={3} className="gridContainer-style">
-          {/* <Grid container spacing={3} className> */}
             <Grid item className="gridCard-style">
               <CardComponent cardElements={this.handleCardComponent(true)} />
             </Grid>
             <Grid item className="gridIssueCard-style">
             <CardComponent cardElements={this.handleCardComponent(false)} />
             </Grid>
-          {/* </Grid> */}
       </Grid>
     );
   }

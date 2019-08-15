@@ -1,4 +1,5 @@
 import { type } from '../actions/index';
+import { actionType } from '../actions/chartActions';
 import { combineReducers } from 'redux'
 
 const initialState = {
@@ -12,6 +13,11 @@ const initialState = {
     missingPR: null,
     missingIssues: null,
     loading: true,
+};
+
+const initialStateChartLine = {
+    pullRequestSelected: true,
+    issuesSelected: false
 };
 
 export const repoReducer = (state = initialState, action) => {
@@ -58,8 +64,25 @@ export const repoReducer = (state = initialState, action) => {
     }
 };
 
+export const tabReducer = (state = initialStateChartLine, action) => {
+    switch(action.type) {
+    case actionType.SELECTED_PULL_REQUEST:
+        return {
+            pullRequestSelected: true,
+            issuesSelected: false
+        }
+    case actionType.SELECTED_ISSUES:
+        return {
+            pullRequestSelected: false,
+            issuesSelected: true
+        }
+    default: return state;
+    }
+};
+
 const rootReducer = combineReducers({
-    repoReducer
+    repoReducer,
+    tabReducer
 });
 
 export default rootReducer;

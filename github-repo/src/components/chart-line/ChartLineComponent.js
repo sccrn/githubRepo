@@ -28,17 +28,6 @@ export default class ChartLineComponent extends Component {
               >
                 <div>Issues</div>
                 <LegendComponent data={slice.points} />
-                {/* {slice.points.map(point => (
-                  <div
-                    key={point.id}
-                    style={{
-                      color: point.serieColor,
-                      padding: "3px 0"
-                    }}
-                  >
-                    <strong>{point.serieId}</strong> [{point.data.yFormatted}]
-                  </div>
-                ))} */}
               </div>
             );
           }}

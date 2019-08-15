@@ -1,0 +1,21 @@
+.buttonSelected-style {
+    width: 110px !important;
+    border-top: 2px solid rgba(11, 95, 255, 1) !important;
+    padding: 0px !important;
+    border-radius: 0px !important;
+    text-transform: capitalize !important;
+    padding-top: 12px !important;
+}
+
+.buttonNotSelected-style {
+    width: 110px !important;
+    border-top: none !important;
+    padding: 0px !important;
+    border-radius: 0px !important;
+    text-transform: capitalize !important;
+    padding-top: 15px !important;
+}
+
+.gridFirstButton-style {
+    margin-left: 20px !important;
+}
