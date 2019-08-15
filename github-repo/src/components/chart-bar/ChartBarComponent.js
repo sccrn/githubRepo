@@ -16,6 +16,9 @@ export const optionsBar = {
         backgroundColor: "#FFFFFF",
         bodyFontColor: "#2C2D37",
     },
+    legend: {
+        display: false
+    },
     layout: { padding: 0 },
     scales: {
         xAxes: [

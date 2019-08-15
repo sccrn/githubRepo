@@ -5,16 +5,16 @@ import './CustomTabComponent.css';
 
 export default class CustomTabComponent extends Component {
   render() {
-    const { jsonTitles, tabState, selectTabButton } = this.props;
+    const { jsonTitles, tabState, selectPullRequestTab, selectIssuesTab } = this.props;
     return (
       <Grid container>
         <Grid item className="gridFirstButton-style">
-          <Button className={tabState.pullRequestSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectTabButton(true)}>
+          <Button className={tabState.pullRequestSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectPullRequestTab}>
             {jsonTitles.pullR.title}
           </Button>
         </Grid>
         <Grid item>
-          <Button className={tabState.issuesSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectTabButton(false)}>
+          <Button className={tabState.issuesSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectIssuesTab}>
             {jsonTitles.issues.title}
           </Button>
         </Grid>
@@ -26,5 +26,6 @@ export default class CustomTabComponent extends Component {
 CustomTabComponent.propTypes = {
   jsonTitles: PropTypes.object.isRequired,
   tabState: PropTypes.object.isRequired,
-  selectTabButton: PropTypes.func.isRequired
+  selectPullRequestTab: PropTypes.func.isRequired,
+  selectIssuesTab: PropTypes.func.isRequired
 };

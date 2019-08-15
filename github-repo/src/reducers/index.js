@@ -12,7 +12,8 @@ const initialState = {
     issues: [],
     missingPR: null,
     missingIssues: null,
-    loading: true,
+    loading: false,
+    loaded: false,
 };
 
 const initialStateChartLine = {
@@ -26,7 +27,9 @@ export const repoReducer = (state = initialState, action) => {
         return {
             ...state,
             username: action.username,
-            repo: action.repo
+            repo: action.repo,
+            loading: true,
+            loaded: false,
         }
     case type.LOADING_REPO:
         return {
@@ -52,7 +55,8 @@ export const repoReducer = (state = initialState, action) => {
     case type.LOAD_REPO_DATA_SUCCESS:
         return {
             ...state,
-            loading: false
+            loading: false, 
+            loaded: true
         }
     case type.LOAD_REPO_DATA_ERROR:
         return {

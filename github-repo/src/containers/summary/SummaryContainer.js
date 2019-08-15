@@ -122,7 +122,8 @@ class SummaryContainer extends Component {
     super(props);
 
     this.handleJsonTitles = this.handleJsonTitles.bind(this);
-    this.handleCustomTabClick = this.handleCustomTabClick.bind(this);
+    this.handleCustomTabPullRequest = this.handleCustomTabPullRequest.bind(this);
+    this.handleCustomTabIssues = this.handleCustomTabIssues.bind(this);
   }
 
   handleJsonTitles() {
@@ -133,13 +134,15 @@ class SummaryContainer extends Component {
     return titles;
   }
 
-  handleCustomTabClick(isPullRequest) {
-    if (this.props.repoInfo.events) {
-      if (isPullRequest) {
-        this.props.selectPullRequest();
-      } else {
-        this.props.selectIssues();
-      }
+  handleCustomTabPullRequest() {
+    if(this.props.repoInfo.events) {
+      this.props.selectPullRequest()
+    }
+  }
+
+  handleCustomTabIssues() {
+    if(this.props.repoInfo.events) {
+      this.props.selectIssues()
     }
   }
 
@@ -151,7 +154,8 @@ class SummaryContainer extends Component {
         <CustomTabComponent
           jsonTitles={this.handleJsonTitles()}
           tabState={this.props.tabState}
-          selectTabButton={this.handleCustomTabClick}
+          selectPullRequestTab={this.handleCustomTabPullRequest}
+          selectIssuesTab={this.handleCustomTabIssues}
         />
         <CardContent>
           <ChartLineComponent jsonChart={data} />
