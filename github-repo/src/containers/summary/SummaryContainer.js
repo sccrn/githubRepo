@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Divider
-} from "@material-ui/core";
+import { Card, CardHeader, CardContent, Divider } from "@material-ui/core";
 import * as constants from "../../utils/constants";
 import ChartLineComponent from "../../components/chart-line/ChartLineComponent";
 import CustomTabComponent from "../../components/custom-tab/CustomTabComponent";
-import { selectIssues, selectPullRequest } from '../../actions/chartActions';
+import { selectIssues, selectPullRequest } from "../../actions/chartActions";
 
 export const data = [
   {
@@ -126,8 +121,8 @@ class SummaryContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleJsonTitles = this.handleJsonTitles.bind(this)
-    this.handleCustomTabClick = this.handleCustomTabClick.bind(this)
+    this.handleJsonTitles = this.handleJsonTitles.bind(this);
+    this.handleCustomTabClick = this.handleCustomTabClick.bind(this);
   }
 
   handleJsonTitles() {
@@ -139,13 +134,13 @@ class SummaryContainer extends Component {
   }
 
   handleCustomTabClick(isPullRequest) {
-    if(this.props.repoInfo.events) {
-    if(isPullRequest) {
-      this.props.selectPullRequest()
-    } else {
-      this.props.selectIssues()
+    if (this.props.repoInfo.events) {
+      if (isPullRequest) {
+        this.props.selectPullRequest();
+      } else {
+        this.props.selectIssues();
+      }
     }
-  }
   }
 
   render() {
@@ -153,9 +148,11 @@ class SummaryContainer extends Component {
       <Card className="cardChart-section">
         <CardHeader title={constants.monthSummary} />
         <Divider />
-        <CustomTabComponent jsonTitles={this.handleJsonTitles()} 
-                            tabState={this.props.tabState}
-                            selectTabButton={this.handleCustomTabClick} />
+        <CustomTabComponent
+          jsonTitles={this.handleJsonTitles()}
+          tabState={this.props.tabState}
+          selectTabButton={this.handleCustomTabClick}
+        />
         <CardContent>
           <ChartLineComponent jsonChart={data} />
         </CardContent>
@@ -167,7 +164,7 @@ class SummaryContainer extends Component {
 const mapStateToProps = state => {
   return {
     repoInfo: state.repoReducer,
-    tabState: state.tabReducer 
+    tabState: state.tabReducer
   };
 };
 
@@ -176,4 +173,7 @@ const mapDispatchToProps = {
   selectIssues: selectIssues
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SummaryContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SummaryContainer);

@@ -45,3 +45,20 @@ html {
 .gridIssueCard-style {
   width: 49% !important;
 }
+
+.searchDiv-style {
+  padding-left: 20px;
+  display: grid;
+  background-color: white;
+}
+
+.usernameInput-style {
+  font-size: 23px !important;
+  color: #272832 !important;
+  margin-top: 8px !important;
+}
+
+.repoName-style {
+  font-size: 13px !important;
+  color: #A7A9BC !important;
+}

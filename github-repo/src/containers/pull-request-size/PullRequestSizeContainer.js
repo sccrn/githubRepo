@@ -8,7 +8,6 @@ import {
     Divider
   } from '@material-ui/core';
 import * as constants from '../../utils/constants';
-import { loadRepoData } from '../../actions/index';
 
 export const data = {
     labels: ["Small", "Medium", "Large"],
@@ -60,8 +59,4 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = {
-    loadRepoData: loadRepoData
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PullRequestSizeContainer);
+export default connect(mapStateToProps)(PullRequestSizeContainer);
