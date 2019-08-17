@@ -5,13 +5,11 @@ import * as constants from '../utils/constants';
 import * as api from '../services/api';
 
 function* loadRepoData(action) {
-    let endpointRepo = `${constants.API_ROOT}/${action.username}/${action.repo}`
-    let endpointEvents = `${constants.API_ROOT}/${action.username}/${action.repo}/events`
-    let endpointIssues = `${constants.API_ROOT}/${action.username}/${action.repo}/issues/events`
-    const responseRepo = yield call(api.callAPIRequest, endpointRepo)
+    let endpointEvents = `${constants.API_ROOT}/${action.username}/${action.repo}/pulls?state=all`
+    let endpointIssues = `${constants.API_ROOT}/${action.username}/${action.repo}/issues?state=all`
     const responseEvents = yield call(api.callAPIRequest, endpointEvents)
     const responseIssues = yield call(api.callAPIRequest, endpointIssues);
-    yield put(actions.loadRepoDataSuccess(responseRepo.data, responseEvents.data, responseIssues.data))
+    yield put(actions.loadRepoDataSuccess(responseEvents.data, responseIssues.data))
 }
 
 

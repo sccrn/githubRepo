@@ -5,9 +5,8 @@ import { combineReducers } from 'redux'
 const initialState = {
     username: null,
     repo: null,
-    repoInfo: [],
-    events: [],
-    issuesEvents: [],
+    pulls: [],
+    issues: [],
     loading: false,
     loaded: false,
 };
@@ -30,9 +29,8 @@ export const repoReducer = (state = initialState, action) => {
     case type.LOAD_REPO_DATA_SUCCESS:
         return {
             ...state,
-            repoInfo: action.repoInfo,
-            events: action.events,
-            issuesEvents: action.issues,
+            pulls: action.pulls,
+            issues: action.issues,
             loading: false, 
             loaded: true
         }

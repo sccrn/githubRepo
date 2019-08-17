@@ -8,7 +8,7 @@ export function jsonChartBarCreation(pullRequests) {
   json.labels.forEach(item => {
     let obj = "";
     pullRequests.forEach(pullRequest => {
-      if(pullRequestSize(pullRequest, item) && pullRequest.payload.pull_request.merged_at) {
+      if(pullRequestSize(pullRequest, item) && pullRequest.state === "closed") {
         obj = createMergeTime(pullRequest.payload.pull_request.merged_at)
         data.push(obj)
       }
@@ -32,20 +32,12 @@ export function pullRequestSize(item, selectedSize) {
   return selectedSize === size;
 }
 
-function createMergeTime(prItem) {
-  var today = parseInt(new Date().getTime()); 
-  var date = parseInt(new Date(prItem).getTime());
-  var timeDiff = (today - date)/3600000;
-
-  return parseInt(timeDiff)
-}
-
-export function averageTimePullRequest(events) {
+export function averageTimePullRequest(pulls) {
   var data = [];
 
-  events.forEach(event => {
-    if(event.type === "PullRequestEvent" && event.payload.pull_request.merged_at) {
-      let obj = createMergeTime(event.payload.pull_request.merged_at)
+  pulls.forEach(pull => {
+    if(pull.state === "closed") {
+      let obj = createMergeTime(pull.created_at, pull.closed_at)
       data.push(obj)
     }
   });
@@ -57,8 +49,8 @@ export function averageTimeIssues(issues) {
   var data = [];
 
   issues.forEach(issue => {
-    if(issue.issue.closed_at) {
-      let obj = createMergeTime(issue.issue.closed_at)
+    if(issue.state === "closed") {
+      let obj = createMergeTime(issue.created_at, issue.closed_at)
       data.push(obj)
     }
   });
@@ -66,4 +58,10 @@ export function averageTimeIssues(issues) {
   return avg
 }
 
+function createMergeTime(created, closed) {
+  var closedTime = parseInt(new Date(closed).getTime()); 
+  var createdTime = parseInt(new Date(created).getTime());
+  var timeDiff = (closedTime - createdTime)/3600000;
 
+  return parseInt(timeDiff)
+}

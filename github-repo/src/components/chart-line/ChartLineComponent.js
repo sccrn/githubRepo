@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./ChartLineComponent.css";
 import PropTypes from "prop-types";
 import { ResponsiveLine } from "@nivo/line";
-import LegendComponent from '../legend/LegendComponent';
+import LegendComponent from "../legend/LegendComponent";
 
 export default class ChartLineComponent extends Component {
   render() {
@@ -11,8 +11,18 @@ export default class ChartLineComponent extends Component {
       <div className="Chart-component">
         <ResponsiveLine
           data={jsonChart}
-          enableSlices="x"
+          enableSlices={false}
           curve={"linear"}
+          yScale={{
+            type: "linear",
+            stacked: true
+          }}
+          xScale={{
+            type: "time",
+            format: "%Y-%m-%d",
+            precision: "day"
+          }}
+          xFormat="time:%Y-%m-%d"
           yScale={{
             type: "linear",
             stacked: true
@@ -35,13 +45,16 @@ export default class ChartLineComponent extends Component {
           axisTop={null}
           axisRight={null}
           axisBottom={{
+            legendOffset: 36,
+            legendPosition: "middle",
+            format: "%b %d",
+            tickValues: "every 3 days",
+            legend: "",
             orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "",
-            legendOffset: 36,
-            legendPosition: "middle"
+
           }}
           axisLeft={{
             orient: "left",

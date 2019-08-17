@@ -17,10 +17,7 @@ class PullRequestSizeContainer extends Component {
         this.handleChartBar = this.handleChartBar.bind(this);
     }
     handleChartBar() {
-        let repo = this.props.repoInfo.events;
-        var pullRequests = repo.filter(element => {
-            return element.type === "PullRequestEvent";
-          });
+        let pullRequests = this.props.repoInfo.pulls;
         let json = helper.jsonChartBarCreation(pullRequests);
         return json;
     }

@@ -12,11 +12,10 @@ export function loadRepoData(username, repo) {
     }
 }
 
-export function loadRepoDataSuccess(repoInfo, events, issues) {
+export function loadRepoDataSuccess(pulls, issues) {
     return {
         type: type.LOAD_REPO_DATA_SUCCESS,
-        repoInfo,
-        events,
+        pulls,
         issues
     }
 }
