@@ -1,21 +1,57 @@
-.buttonSelected-style {
-    width: 110px !important;
+.pullRequestSelected-style {
+    width: 115px !important;
     border-top: 2px solid rgba(11, 95, 255, 1) !important;
     padding: 0px !important;
     border-radius: 0px !important;
+    margin-left: 16px !important;
     text-transform: capitalize !important;
-    padding-top: 12px !important;
 }
 
-.buttonNotSelected-style {
-    width: 110px !important;
-    border-top: none !important;
+.issuesSelected-style {
+    width: 115px !important;
+    border-top: 2px solid rgba(11, 95, 255, 1) !important;
     padding: 0px !important;
     border-radius: 0px !important;
+    color: #6B6C7E;
     text-transform: capitalize !important;
-    padding-top: 15px !important;
 }
 
-.gridFirstButton-style {
-    margin-left: 20px !important;
+.pullRequestNotSelected-style {
+    width: 115px !important;
+    border-top: none !important;
+    padding-top: 2px !important;
+    border-radius: 0px !important;
+    margin-left: 16px !important;
+    color: #6B6C7E;
+    text-transform: capitalize !important;
+}
+
+.issuesNotSelected-style {
+    width: 115px !important;
+    border-top: none !important;
+    padding-top: 2px !important;
+    border-radius: 0px !important;
+    text-transform: capitalize !important;
+}
+
+.button-style {
+    width: 115px !important;
+    display: contents !important;
+    text-transform: capitalize !important;
+    text-align: left;
+}
+
+.name-style {
+    margin-left: 10px;
+    margin-top: 12px;
+}
+
+.quantity-style {
+    margin-top: -11px;
+    font-size: 45px;
+    margin-left: 9px;
+}
+
+.MuiTouchRipple-root {
+    display: none !important;
 }

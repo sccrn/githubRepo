@@ -97,7 +97,9 @@ class SummaryContainer extends Component {
   handleJsonTitles() {
     var titles = constants.jsonTitles;
     titles.pullR.title = "Pull Requests";
+    titles.pullR.value = this.props.repoInfo.pulls.length;
     titles.issues.title = "Issues";
+    titles.issues.value = this.props.repoInfo.issues.length;
 
     return titles;
   }

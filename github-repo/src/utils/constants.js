@@ -11,9 +11,11 @@ export const waitInterval = 2000;
 export const jsonTitles = {
     "pullR": {
         "title": "",
+        "value": 0,
     },
     "issues": {
         "title": "",
+        "value": 0,
     }
 }
 

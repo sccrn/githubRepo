@@ -13,17 +13,17 @@ class MergeTimeContainer extends Component {
     }
 
     handlePullRequestTime() {
-      var json = constants.jsonCard;
-      json.title = constants.pullRequestMergeTime;
-      json.value = helper.averageTimePullRequest(this.props.repoInfo.pulls);
-      return json
+      var jsonPull = {};
+      jsonPull["title"] = constants.pullRequestMergeTime;
+      jsonPull["value"] = helper.averageTimePullRequest(this.props.repoInfo.pulls);
+      return jsonPull
     }
 
     handleIssuesTime() {
-      var json = constants.jsonCard;
-      json.title = constants.issueCloseTime;
-      json.value = helper.averageTimeIssues(this.props.repoInfo.issues);
-      return json
+      var jsonIssues = {};
+      jsonIssues["title"] = constants.issueCloseTime;
+      jsonIssues["value"] = helper.averageTimeIssues(this.props.repoInfo.issues);
+      return jsonIssues
     }
 
   render() {

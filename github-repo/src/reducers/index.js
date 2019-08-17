@@ -7,6 +7,7 @@ const initialState = {
     repo: null,
     pulls: [],
     issues: [],
+    missingPulls: 0,
     loading: false,
     loaded: false,
 };
@@ -26,11 +27,21 @@ export const repoReducer = (state = initialState, action) => {
             loading: true,
             loaded: false,
         }
+    case type.START_LOADING_PULLS:
+        return {
+            ...state,
+            missingPulls: action.missingPulls,
+            issues: action.issues
+        }
+    case type.LOADING_PULLS:
+        return {
+            ...state,
+            missingPulls: state.missingPulls - 1,
+            pulls: [...state.pulls, action.pull]
+        }
     case type.LOAD_REPO_DATA_SUCCESS:
         return {
             ...state,
-            pulls: action.pulls,
-            issues: action.issues,
             loading: false, 
             loaded: true
         }

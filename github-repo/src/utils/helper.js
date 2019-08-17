@@ -1,5 +1,6 @@
 import * as loadsh from "lodash";
 import * as constants from './constants';
+import * as moment from 'moment';
 
 export function jsonChartBarCreation(pullRequests) {
   var json = constants.jsonChartBar;
@@ -8,8 +9,8 @@ export function jsonChartBarCreation(pullRequests) {
   json.labels.forEach(item => {
     let obj = "";
     pullRequests.forEach(pullRequest => {
-      if(pullRequestSize(pullRequest, item) && pullRequest.state === "closed") {
-        obj = createMergeTime(pullRequest.payload.pull_request.merged_at)
+      if(pullRequestSize(pullRequest, item) && pullRequest.merged) {
+        obj = createMergeTime(pullRequest.created_at, pullRequest.merged_at)
         data.push(obj)
       }
     });
@@ -20,7 +21,7 @@ export function jsonChartBarCreation(pullRequests) {
 }
 
 export function pullRequestSize(item, selectedSize) {
-  let total = item.payload.pull_request.additions + item.payload.pull_request.deletions;
+  let total = item.additions + item.deletions;
   let size;
   if (loadsh.inRange(total, 0, 100)) {
     size = "Small";
@@ -36,13 +37,14 @@ export function averageTimePullRequest(pulls) {
   var data = [];
 
   pulls.forEach(pull => {
-    if(pull.state === "closed") {
-      let obj = createMergeTime(pull.created_at, pull.closed_at)
+    if(pull.merged) {
+      let obj = createMergeTime(pull.created_at, pull.merged_at)
       data.push(obj)
     }
   });
-  let avg = parseInt(loadsh.mean(data))
-  return avg
+  let avg = loadsh.mean(data)
+  let result = formatterAverageTime(avg)
+  return result
 }
 
 export function averageTimeIssues(issues) {
@@ -54,14 +56,24 @@ export function averageTimeIssues(issues) {
       data.push(obj)
     }
   });
-  let avg = parseInt(loadsh.mean(data))
-  return avg
+  let avg = loadsh.mean(data)
+  let result = formatterAverageTime(avg)
+  return result
 }
 
-function createMergeTime(created, closed) {
-  var closedTime = parseInt(new Date(closed).getTime()); 
-  var createdTime = parseInt(new Date(created).getTime());
-  var timeDiff = (closedTime - createdTime)/3600000;
+function createMergeTime(start, end) {
+  var startedAt = moment(start)
+  var endedAt = moment(end)
+  return endedAt.diff(startedAt, 'hours')
+}
 
-  return parseInt(timeDiff)
+function formatterAverageTime(time) {
+  var duration = moment.duration(time, 'hours');
+
+  var result = ""
+  if (duration._data.days > 0) { result = duration._data.days === 1 ? `${duration._data.days}day` : `${duration._data.days}days` }
+  if (duration._data.hours > 0) { result = `${result} ${duration._data.hours}h`}
+  if (duration._data.minutes > 0) { result = `${result}${duration._data.minutes}m`}
+
+  return result
 }

@@ -8,15 +8,17 @@ export default class CustomTabComponent extends Component {
     const { jsonTitles, tabState, selectPullRequestTab, selectIssuesTab } = this.props;
     return (
       <Grid container>
-        <Grid item className="gridFirstButton-style">
-          <Button className={tabState.pullRequestSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectPullRequestTab}>
-            {jsonTitles.pullR.title}
-          </Button>
+        <Grid item className={tabState.pullRequestSelected ? 'pullRequestSelected-style' : 'pullRequestNotSelected-style'}>
+          <Button className="button-style" onClick={selectPullRequestTab}>
+           <div className="name-style">{jsonTitles.pullR.title}</div>
+            <div className="quantity-style">{jsonTitles.pullR.value}</div>
+            </Button>
         </Grid>
-        <Grid item>
-          <Button className={tabState.issuesSelected ? 'buttonSelected-style' : 'buttonNotSelected-style'} onClick={selectIssuesTab}>
-            {jsonTitles.issues.title}
-          </Button>
+        <Grid item className={tabState.issuesSelected ? 'issuesSelected-style' : 'issuesNotSelected-style'}>
+           <Button className="button-style" onClick={selectIssuesTab}>
+           <div className="name-style">{jsonTitles.issues.title}</div>
+            <div className="quantity-style">{jsonTitles.issues.value}</div>
+            </Button>
         </Grid>
       </Grid>
     );
